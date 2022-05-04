@@ -1,0 +1,22 @@
+#####
+POST http://localhost:3333/folha/cadastrar
+content-type: application/json
+
+{
+    "mes": 111,
+    "ano": 2022,
+    "horas": 100,
+    "valor": 50,
+    "funcionario":{
+        "nome": "Eduardo Neres",
+        "cpf": "32213213211"
+    }
+}
+
+###
+GET http://localhost:3333/folha/calcular
+
+###
+GET http://localhost:3333/folha/listar
+###
+GET http://localhost:3333/folha/listarprocessadas
