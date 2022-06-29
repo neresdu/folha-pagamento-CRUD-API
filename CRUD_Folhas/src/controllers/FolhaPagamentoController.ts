@@ -2,10 +2,12 @@ import axios from "axios";
 import { json, Request, Response } from "express";
 import { FolhaPagamentoRepository } from "../repositories/FolhaPagamentoRepository";
 import { FolhaPagamento } from "../models/FolhaPagamento";
+import { RabbitMQService } from "./RabbitMQ";
 
 const folhaPagamentoRepository = new FolhaPagamentoRepository();
-
+const rabbitMQService = new RabbitMQService();
 export class FolhaPagamentoController {
+  
   cadastrar(request: Request, response: Response) {
     const folha = request.body;
     const folhas = folhaPagamentoRepository.cadastrar(folha);
@@ -19,7 +21,7 @@ export class FolhaPagamentoController {
      // .catch((error) => {  
       //  console.log(error);
      // });
-
+     rabbitMQService.publish(folhaPagamentoRepository.calcularFolha(folha));
     response.status(201).json({ message: "Folha cadastrada", data: folhas });
   }
 

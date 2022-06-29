@@ -17,6 +17,8 @@ content-type: application/json
 GET http://localhost:3333/folha/calcular
 
 ###
-GET http://localhost:3333/folha/listar
+GET http://localhost:8080/folha/listar
 ###
-GET http://localhost:3333/folha/listarprocessadas
+GET http://localhost:8080/folha/total
+####
+GET http://localhost:8080/folha/media
