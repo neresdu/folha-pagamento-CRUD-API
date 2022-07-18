@@ -1,33 +1,25 @@
-import { FolhaPagamento } from "../models/FolhaPagamento";
+import { Payroll } from "../models/Payroll";
 
-const folhas: FolhaPagamento[] = [];
+const payrolls: Payroll[] = [];
 let id = 0;
 
-export class FolhaPagamentoRepository {
-  cadastrar(folha: FolhaPagamento): FolhaPagamento[] {
-    id++;
-    folha.processada = false;
-    folha.enviada = false;
-    folha.id = id;
-    folhas.push(folha);
-    return folhas;
+export class payrollPagamentoRepository {
+
+  listar(): Payroll[] {
+    return payrolls;
   }
 
-  listar(): FolhaPagamento[] {
-    return folhas;
-  }
-
-  listarProcessadas(): FolhaPagamento[] {
-    const folhasProcessadas: FolhaPagamento[] = [];
-    for (let index = 0; index < folhas.length; index++) {
-      const folha = folhas[index];
-      if(folha.processada && !folha.enviada){
-        folha.enviada = true;
-        folhasProcessadas.push(folha);
+  listarProcessadas(): Payroll[] {
+    const processedPayrolls: Payroll[] = [];
+    for (let index = 0; index < payrolls.length; index++) {
+      const payroll = payrolls[index];
+      if(payroll.processed && !payroll.sent){
+        payroll.sent = true;
+        processedPayrolls.push(payroll);
       }
       
     }
-    return folhasProcessadas;
+    return processedPayrolls;
   }
 
 //  remover(id: number): Produto[] {
@@ -36,58 +28,52 @@ export class FolhaPagamentoRepository {
 //    return produtos;
 //  }
 
-  calcular(): FolhaPagamento[] {
-    for (let i = 0; i < folhas.length; i++) {
-      let folhaAlterada = folhas[i];
-      if(!folhaAlterada.processada){
-        folhaAlterada.processada = true;
-        folhaAlterada.bruto = folhaAlterada.horas * folhaAlterada.valor;
+  calcular(): Payroll[] {
+    for (let i = 0; i < payrolls.length; i++) {
+      let payrollAlterada = payrolls[i];
+      if(!payrollAlterada.processed){
+        payrollAlterada.processed = true;
+        payrollAlterada.grossSalary = payrollAlterada.workedHours * payrollAlterada.hourValue;
 
         //irrf
-        if(folhaAlterada.bruto <= 1903.98){
-          folhaAlterada.irrf = 0.0
+        if(payrollAlterada.grossSalary <= 1903.98){
+          payrollAlterada.irrf = 0.0
         }
-        if(folhaAlterada.bruto > 1903.98 && folhaAlterada.bruto <= 2826.65){
-          folhaAlterada.irrf = (folhaAlterada.bruto * 0.075) - 142.80;
+        if(payrollAlterada.grossSalary > 1903.98 && payrollAlterada.grossSalary <= 2826.65){
+          payrollAlterada.irrf = (payrollAlterada.grossSalary * 0.075) - 142.80;
         }
-        if(folhaAlterada.bruto > 2826.65 && folhaAlterada.bruto <= 3751.05){
-          folhaAlterada.irrf = (folhaAlterada.bruto * 0.15) - 354.80;
+        if(payrollAlterada.grossSalary > 2826.65 && payrollAlterada.grossSalary <= 3751.05){
+          payrollAlterada.irrf = (payrollAlterada.grossSalary * 0.15) - 354.80;
         }
-        if(folhaAlterada.bruto > 3751.06 && folhaAlterada.bruto <= 4664.68){
-          folhaAlterada.irrf = (folhaAlterada.bruto * 0.225) - 636.13;
+        if(payrollAlterada.grossSalary > 3751.06 && payrollAlterada.grossSalary <= 4664.68){
+          payrollAlterada.irrf = (payrollAlterada.grossSalary * 0.225) - 636.13;
         }
-        if(folhaAlterada.bruto > 4664.68){
-          folhaAlterada.irrf = (folhaAlterada.bruto * 0.275) - 869.36;
+        if(payrollAlterada.grossSalary > 4664.68){
+          payrollAlterada.irrf = (payrollAlterada.grossSalary * 0.275) - 869.36;
         }
 
         //inss
-        if(folhaAlterada.bruto > 1693.72){
-          folhaAlterada.inss = folhaAlterada.bruto * 0.08;
+        if(payrollAlterada.grossSalary > 1693.72){
+          payrollAlterada.inss = payrollAlterada.grossSalary * 0.08;
         }
-        if(folhaAlterada.bruto >= 1693.73 && folhaAlterada.bruto <= 2822.90){
-          folhaAlterada.inss = folhaAlterada.bruto * 0.09;
+        if(payrollAlterada.grossSalary >= 1693.73 && payrollAlterada.grossSalary <= 2822.90){
+          payrollAlterada.inss = payrollAlterada.grossSalary * 0.09;
         }
-        if(folhaAlterada.bruto >= 2822.91 && folhaAlterada.bruto <= 5645.80){
-          folhaAlterada.inss = folhaAlterada.bruto * 0.11;
+        if(payrollAlterada.grossSalary >= 2822.91 && payrollAlterada.grossSalary <= 5645.80){
+          payrollAlterada.inss = payrollAlterada.grossSalary * 0.11;
         }
-        if(folhaAlterada.bruto > 5645.81){
-          folhaAlterada.inss = 621.03;
+        if(payrollAlterada.grossSalary > 5645.81){
+          payrollAlterada.inss = 621.03;
         }
         //fgts
-        folhaAlterada.fgts = folhaAlterada.bruto * 0.08;
+        payrollAlterada.fgts = payrollAlterada.grossSalary * 0.08;
 
-        //liquido
-        folhaAlterada.liquido = folhaAlterada.bruto - folhaAlterada.irrf - folhaAlterada.inss;
+        //netSalary
+        payrollAlterada.netSalary = payrollAlterada.grossSalary - payrollAlterada.irrf - payrollAlterada.inss;
         
-        folhas[i] = folhaAlterada;
+        payrolls[i] = payrollAlterada;
       }
     }
-    return folhas;
-
-//    const index = folhas.findIndex((folha) => folha.id === folhas.id && folha.processada === false);
- //   folhaAlterada.processada = true;
-  //  folhaAlterada.bruto = folhaAlterada.horas * folhaAlterada.valor;
-   // folhas[index] = folhaAlterada;
-    //return folhas;
+    return payrolls;
   }
 }

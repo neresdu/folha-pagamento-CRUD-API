@@ -1,9 +1,9 @@
-import { FolhaPagamento } from "../models/FolhaPagamento";
+import { Payroll } from "../models/FolhaPagamento";
 
-const folhas: FolhaPagamento[] = [];
+const folhas: Payroll[] = [];
 
 export class FolhaPagamentoRepository {
-  cadastrar(folhasRecebidas: FolhaPagamento[]): FolhaPagamento[] {
+  cadastrar(folhasRecebidas: Payroll[]): Payroll[] {
     for (let index = 0; index < folhasRecebidas.length; index++) {
       const folha = folhasRecebidas[index];
       folhas.push(folha);
@@ -11,21 +11,19 @@ export class FolhaPagamentoRepository {
     return folhas;
   }
 
-  listarPorCpf(cpf:String, mes:String, ano:String): FolhaPagamento {
-        console.log(cpf);
-        console.log(mes);
-        console.log(ano);
-        for (let index = 0; index < folhas.length; index++) {
-          const folha = folhas[index];
-          if(folha.funcionario.cpf === cpf &&
-            folha.ano.toString === ano.toString &&
-            folha.mes.toString === mes.toString){
-              return folha
+  listarPorCpf(cpf:String, mes:Number, ano:Number): Payroll {
+        for (let index = 0; index <= folhas.length; index++) {
+          var folha = folhas[index];
+          if(folha.employee.cpf === cpf &&
+            folha.year === ano &&
+            folha.month === mes){
+              console.log("Payroll found:")
+              return folha;
             }
         }
         return folhas[0];
   }
-  listar(): FolhaPagamento[] {
+  listar(): Payroll[] {
     return folhas;
   }
 }
