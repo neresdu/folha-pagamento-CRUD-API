@@ -10,8 +10,8 @@ routes.get("/", (request, response) => {
 
 //Produto
 // routes.post("/folha/cadastrar", new PayrollController().cadastrar);
-routes.get("/folha/listar", new PayrollController().list);
-routes.get("/folha/listar/:cpf/:mes/:ano", new PayrollController().listarByCpf);
+routes.get("/payroll/list", new PayrollController().list);
+routes.get("/payroll/list/:cpf/:month/:year", new PayrollController().listByCpf);
 
 
 export { routes };

@@ -16,7 +16,7 @@ export class PayrollController {
         const folhas = folhaPagamentoRepository.listar();
         response.status(200).json({ message: "Listagem de produtos", data: folhas });
       }
-      listarByCpf(request: Request, response: Response) {
+      listByCpf(request: Request, response: Response) {
         const folhas = folhaPagamentoRepository.listarPorCpf(request.params.cpf, parseInt(request.params.mes) , parseInt(request.params.ano));
         response.status(200).json({ message: "Listagem de produtos", data: folhas });
       }
