@@ -9,10 +9,6 @@ routes.get("/", (request, response) => {
 });
 
 //Produto
-routes.post("/folha/cadastrar", new PayrollController().register);
-routes.get("/folha/calcular", new PayrollController().calculate);
-routes.get("/folha/listar", new PayrollController().listar);
-routes.get("/folha/listarprocessadas", new PayrollController().listarProcessadas);
-//routes.delete("/produto/deletar/:id", new ProdutoController().deletar);
-
+routes.post("/payroll/register", new PayrollController().register);
+routes.get("/payroll/calculate", new PayrollController().calculate);
 export { routes };

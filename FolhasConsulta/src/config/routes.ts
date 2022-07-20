@@ -11,7 +11,7 @@ routes.get("/", (request, response) => {
 //Produto
 // routes.post("/folha/cadastrar", new PayrollController().cadastrar);
 routes.get("/payroll/list", new PayrollController().list);
-routes.get("/payroll/list/:cpf/:month/:year", new PayrollController().listByCpf);
+routes.get("/payroll/list/:cpf/:month/:year", new PayrollController().listByCpfMonthYear);
 
 
 export { routes };

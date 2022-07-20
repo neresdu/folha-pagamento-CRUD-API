@@ -1,20 +1,20 @@
 #####
-POST http://localhost:3333/folha/cadastrar
+POST http://localhost:3333/payroll/register
 content-type: application/json
 
 {
-    "month": 987,
-    "year": 1324,
+    "month": 124,
+    "year": 125,
     "workedHours": 500,
     "hourValue": 50,
     "employee":{
         "name": "Eduardo Neres",
-        "cpf": "32213213213"
+        "cpf": "321321"
     }
 }
 
 ###
-GET http://localhost:3333/folha/calcular
+GET http://localhost:3333/payroll/calculate
 
 ###
 GET http://localhost:3333/folha/listar
