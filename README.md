@@ -1,8 +1,9 @@
-Microservice REST API exemple using Node and TypeScript. Based on MVC architecture
+Microservice REST API exemple using Node and TypeScript. Based on MVC architecture<br>
 
-1 Application: (CRUD_Folhas) is reponsable to create and calculate and send payrolls to 2 application using axios
-2 Application: (FolhasConsulta) is responsable only to list all payrolls or just one.
+1 Application: (CRUD_Payrolls) is reponsable to register and calculate payrolls<br>
+2 Application: (Search_Payrolls) is responsable only to list all payrolls or just one specific.<br>
 
-Steps to run server application for each application:
-npm install
-npm run dev
+Steps to run server application for each application:<br>
+npm install<br>
+npm install -g typescript<br>
+npm run dev<br>
