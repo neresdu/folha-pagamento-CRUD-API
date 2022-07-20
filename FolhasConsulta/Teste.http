@@ -1,5 +1,0 @@
-
-###
-GET http://localhost:3334/folha/listar
-###
-GET http://localhost:3334/folha/listar/32213213214/224/2024

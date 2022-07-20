@@ -1,5 +1,4 @@
 import mongoose, { Model, model, Schema, Document, connect } from "mongoose";
-import { FolhaPagamentoController } from "../controllers/FolhaPagamentoController";
 import { Payroll } from "./Payroll";
 
 const payrollSchema: Schema = new Schema<Payroll>({
@@ -25,5 +24,5 @@ const payrollSchema: Schema = new Schema<Payroll>({
     timestamps: true,
 }
 );
-export default mongoose.model<Payroll>('FolhaPagamento', payrollSchema, "Payrolls");
+export default mongoose.model<Payroll>('Payroll', payrollSchema, "Payrolls");
 

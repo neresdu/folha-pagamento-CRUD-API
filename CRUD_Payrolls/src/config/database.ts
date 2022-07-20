@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import mongoose, { connect } from 'mongoose';
 
  function connectDB(){
@@ -14,7 +14,7 @@ import mongoose, { connect } from 'mongoose';
     dbName: "Payroll"
     
   };
-  mongoose.connect(process.env.DB_CONN_STRING || "",MONGO_OPTIONS).then(result =>{
+  mongoose.connect(process.env.DB_CONN_STRING + '',MONGO_OPTIONS).then(result =>{
     console.log("Connect to mongoDb")
   })
  }
