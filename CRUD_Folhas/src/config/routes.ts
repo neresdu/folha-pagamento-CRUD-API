@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { FolhaPagamentoController } from "../controllers/FolhaPagamentoController";
+import { PayrollController } from "../controllers/PayrollController";
 
 const routes = Router();
 
@@ -9,10 +9,10 @@ routes.get("/", (request, response) => {
 });
 
 //Produto
-routes.post("/folha/cadastrar", new FolhaPagamentoController().cadastrar);
-routes.get("/folha/calcular", new FolhaPagamentoController().calcular);
-routes.get("/folha/listar", new FolhaPagamentoController().listar);
-routes.get("/folha/listarprocessadas", new FolhaPagamentoController().listarProcessadas);
+routes.post("/folha/cadastrar", new PayrollController().register);
+routes.get("/folha/calcular", new PayrollController().calculate);
+routes.get("/folha/listar", new PayrollController().listar);
+routes.get("/folha/listarprocessadas", new PayrollController().listarProcessadas);
 //routes.delete("/produto/deletar/:id", new ProdutoController().deletar);
 
 export { routes };
