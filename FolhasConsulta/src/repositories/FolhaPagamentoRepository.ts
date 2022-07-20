@@ -1,4 +1,4 @@
-import { Payroll } from "../models/FolhaPagamento";
+import { Payroll } from "../models/Payroll";
 
 const folhas: Payroll[] = [];
 
