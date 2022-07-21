@@ -2,4 +2,8 @@
 ###
 GET http://localhost:3334/payroll/list
 ###
-GET http://localhost:3334/payroll/list/321321/987/987
+GET http://localhost:3334/payroll/list/123456789/12/2022
+###
+GET http://localhost:3334/payroll/list/123456789
+###
+GET http://localhost:3334/payroll/list/12/2022

@@ -1,0 +1,301 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Payroll API",
+        "description": "Register and calculate payrolls",
+        "termsOfService": "http://localhost:3333/terms",
+        "contact": {
+            "email": "eduardoneress12@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3333/",
+            "description": "Resgiter payroll APi"
+        },
+        {
+            "url": "http://localhost:3334/",
+            "description": "Search payroll API"
+        }
+    ],
+    "paths": {
+        "/payroll/register": {
+            "post": {
+                "summary": "Register payroll",
+                "description": "This route register payroll on database",
+                "servers": [
+                    {
+                        "url": "http://localhost:3333/",
+                        "description": "Resgiter payroll APi"
+                    }
+                ],
+                "tags": [
+                    "Payroll"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Payroll"
+                            },
+                            "examples": {
+                                "payroll": {
+                                    "value": {
+                                        "month": 12,
+                                        "year": 2022,
+                                        "workedHours": 220,
+                                        "hourValue": 10.20,
+                                        "employee": {
+                                            "name": "John John",
+                                            "cpf": "123456789"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "description": "Payroll registred !",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "payroll":{
+                                        "$ref": "#/components/schemas/Payroll"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/payroll/calculate": {
+            "get": {
+                "summary": "Calculate",
+                "description": "This route calculate all registred payrolls",
+                "servers": [
+                    {
+                        "url": "http://localhost:3333/",
+                        "description": "Resgiter payroll APi"
+                    }
+                ],
+                "tags": [
+                    "Payroll"
+                ],
+                "responses":{
+                    "201":{
+                        "description": "Number of payrolls processed !",
+                            "content":{
+                                "application/json":{
+                                    "message":{
+                                        "type":"string"
+                                    }
+                                }
+                                
+                            }
+                    }
+                }
+            }
+        },
+        "/payroll/list/": {
+            "get": {
+                "summary": "Search all payroll",
+                "description": "Search payroll by cpf, month and year",
+                "servers": [
+                    {
+                        "url": "http://localhost:3334/",
+                        "description": "Search payroll API"
+                    }
+                ],
+                "tags": ["Payroll"],
+                "responses":{
+                    "200":{
+                        "description": "Payroll found",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "payroll":{
+                                        "$ref": "#/components/schemas/Payroll"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/payroll/list/{cpf}/{month}/{year}": {
+            "get": {
+                "summary": "Search payroll by cpf, month and year",
+                "description": "Search payroll by cpf, month and year",
+                "servers": [
+                    {
+                        "url": "http://localhost:3334/",
+                        "description": "Search payroll API"
+                    }
+                ],
+                "tags": ["Payroll"],
+                "parameters":[
+                    {
+                        "name": "cpf",
+                        "in": "path",
+                        "description": "Employee CPF",
+                        "required": true,
+                        "type":"string"
+                    },
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "description": "Month",
+                        "required": true,
+                        "type":"number"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "description": "Year",
+                        "required": true,
+                        "type":"number"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Payroll found",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "array",
+                                    "payroll":{
+                                        "$ref": "#/components/schemas/Payroll"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/payroll/list/{cpf}": {
+            "get": {
+                "summary": "Search payroll by employee CPF",
+                "description": "Search payroll by cpf",
+                "servers": [
+                    {
+                        "url": "http://localhost:3334/",
+                        "description": "Search payroll API"
+                    }
+                ],
+                "tags": ["Payroll"],
+                "parameters":[
+                    {
+                        "name": "cpf",
+                        "in": "path",
+                        "description": "Employee CPF",
+                        "required": true,
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Payroll found",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "array",
+                                    "payroll":{
+                                        "$ref": "#/components/schemas/Payroll"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/payroll/list/{month}/{year}": {
+            "get": {
+                "summary": "Search payroll by month and year",
+                "description": "Search payroll by month and year",
+                "servers": [
+                    {
+                        "url": "http://localhost:3334/",
+                        "description": "Search payroll API"
+                    }
+                ],
+                "tags": ["Payroll"],
+                "parameters":[
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "description": "Month",
+                        "required": true,
+                        "type":"number"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "description": "Year",
+                        "required": true,
+                        "type":"number"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Payroll found",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "array",
+                                    "payroll":{
+                                        "$ref": "#/components/schemas/Payroll"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    
+    "components": {
+        "schemas": {
+            "Payroll": {
+                "type": "object",
+                "properties": {
+                    "month": {
+                        "type": "number"
+                    },
+                    "year": {
+                        "type": "number"
+                    },
+                    "workedHours": {
+                        "type": "number"
+                    },
+                    "hourValue": {
+                        "type": "number"
+                    },
+                    "employee": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "cpf": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

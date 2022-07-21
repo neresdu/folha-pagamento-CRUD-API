@@ -3,20 +3,23 @@ POST http://localhost:3333/payroll/register
 content-type: application/json
 
 {
-    "month": 124,
-    "year": 125,
-    "workedHours": 500,
-    "hourValue": 50,
+    "month": 47,
+    "year": 2022,
+    "workedHours": 220,
+    "hourValue": 10,
     "employee":{
-        "name": "Eduardo Neres",
-        "cpf": "321321"
+        "name": "John John",
+        "cpf": "zbcvxv1z"
     }
 }
 
-###
-GET http://localhost:3333/payroll/calculate
+
+
+
+
+
+
+
 
 ###
-GET http://localhost:3333/folha/listar
-###
-GET http://localhost:3333/folha/listarprocessadas
+GET http://localhost:3333/payroll/calculate
