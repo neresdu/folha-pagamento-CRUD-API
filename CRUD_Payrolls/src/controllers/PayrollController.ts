@@ -22,13 +22,30 @@ export class PayrollController {
         cpf: request.body.employee.cpf
       }
     });
-    return payroll.save()
-    .then(result => {
-      return response.status(201).json({message: "Payroll registred", data: payroll});
-    })
-    .catch(error =>{
-      return response.status(400).json({message: error.message, error});
-    })
+    const payrollAlreadyExist = await PayrollSchema.find(
+      {
+        "employee.cpf": payroll.employee.cpf,
+        month: payroll.month,
+        year: payroll.year 
+      })
+      console.log(payrollAlreadyExist)
+      if(payrollAlreadyExist.length > 0){
+        return response.status(400).json({message: "Payroll already registred, _id: ", data: payrollAlreadyExist});
+        
+      }
+      if(payrollAlreadyExist.length <= 0){
+        console.log("Nao existe payroll igual");
+        
+        return payroll.save()
+        .then(result => {
+          return response.status(201).json({message: "Payroll registred", data: payroll});
+        })
+        .catch(error =>{
+          return response.status(400).json({message: error.message, error});
+        })
+      }
+
+
   }
   calculate(request: Request, response: Response) {
 
@@ -42,9 +59,6 @@ export class PayrollController {
           payrolls[index] = results[index];
         }
       }
-            
-            // let payrollsToProcess = payrollService.calculateNetSalary(payrolls);
-            // var resultupdate = await PayrollSchema.updateMany({processed: false},payrollsToProcess)
             var resultUpdate = 0;
             for (let i = 0; i < payrolls.length; i++) {
               let payrollToUpdate = payrollService.calculateNetSalary(payrolls[i]);

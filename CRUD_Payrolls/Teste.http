@@ -3,13 +3,13 @@ POST http://localhost:3333/payroll/register
 content-type: application/json
 
 {
-    "month": 12,
+    "month": 47,
     "year": 2022,
     "workedHours": 220,
     "hourValue": 10,
     "employee":{
         "name": "John John",
-        "cpf": "123456789"
+        "cpf": "zbcvxv1z"
     }
 }
 
