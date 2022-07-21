@@ -27,7 +27,7 @@ export class PayrollController {
       return response.status(201).json({message: "Payroll registred", data: payroll});
     })
     .catch(error =>{
-      return response.status(201).json({message: error.message, error});
+      return response.status(400).json({message: error.message, error});
     })
   }
   calculate(request: Request, response: Response) {

@@ -1,8 +1,6 @@
-import * as dotenv from 'dotenv';
 import mongoose, { connect } from 'mongoose';
 
  function connectDB(){
-  dotenv.config();
 
   const MONGO_OPTIONS = {
     useUnifiedTopology: true,
